@@ -1,3 +1,9 @@
+import heroTitaniumImg from '../assets/images/hero_flagship_titanium_phone_1791194367499.jpg';
+import phoneObsidianImg from '../assets/images/phone_pro_obsidian_1791194383302.jpg';
+import phoneFoldSilverImg from '../assets/images/phone_fold_silver_1791194394606.jpg';
+import phoneCompactCeramicImg from '../assets/images/phone_compact_ceramic_1791194408140.jpg';
+import phoneUltraDesertImg from '../assets/images/phone_ultra_desert_titanium_1791194419207.jpg';
+
 export interface ColorFinish {
   id: string;
   name: string;
@@ -97,7 +103,7 @@ export interface OrderRecord {
   status: 'Confirmed — Preparing Shipment' | 'Optical Calibration Complete' | 'Dispatched via Insured Courier';
 }
 
-export const HERO_IMAGE = '/src/assets/images/hero_flagship_titanium_phone_1791194367499.jpg';
+export const HERO_IMAGE = heroTitaniumImg;
 
 export const PHONES: PhoneProduct[] = [
   {
@@ -111,7 +117,7 @@ export const PHONES: PhoneProduct[] = [
     basePrice: 1099,
     stockStatus: 'In Stock',
     dispatchTime: 'Dispatches within 24 hours',
-    image: '/src/assets/images/hero_flagship_titanium_phone_1791194367499.jpg',
+    image: heroTitaniumImg,
     finishes: [
       {
         id: 'raw-titanium',
@@ -119,7 +125,7 @@ export const PHONES: PhoneProduct[] = [
         hex: '#C4BFB6',
         ringHex: '#9E988E',
         materialNote: ' Bead-blasted raw Grade-5 titanium with clear PVD seal',
-        imageOverride: '/src/assets/images/hero_flagship_titanium_phone_1791194367499.jpg',
+        imageOverride: heroTitaniumImg,
       },
       {
         id: 'obsidian-black',
@@ -127,7 +133,7 @@ export const PHONES: PhoneProduct[] = [
         hex: '#222224',
         ringHex: '#3A3A3D',
         materialNote: 'Deep vapor-deposited carbon titanium finish',
-        imageOverride: '/src/assets/images/phone_pro_obsidian_1791194383302.jpg',
+        imageOverride: phoneObsidianImg,
       },
       {
         id: 'desert-bronze',
@@ -135,7 +141,7 @@ export const PHONES: PhoneProduct[] = [
         hex: '#C8B59E',
         ringHex: '#A69076',
         materialNote: 'Warm mineral-toned satin titanium rail',
-        imageOverride: '/src/assets/images/phone_ultra_desert_titanium_1791194419207.jpg',
+        imageOverride: phoneUltraDesertImg,
       },
     ],
     storageOptions: [
@@ -179,7 +185,7 @@ export const PHONES: PhoneProduct[] = [
     basePrice: 1199,
     stockStatus: 'In Stock',
     dispatchTime: 'Dispatches within 24 hours',
-    image: '/src/assets/images/phone_pro_obsidian_1791194383302.jpg',
+    image: phoneObsidianImg,
     finishes: [
       {
         id: 'obsidian-matte',
@@ -187,7 +193,7 @@ export const PHONES: PhoneProduct[] = [
         hex: '#1C1C1E',
         ringHex: '#333336',
         materialNote: 'Micro-etched matte volcanic glass & dark titanium',
-        imageOverride: '/src/assets/images/phone_pro_obsidian_1791194383302.jpg',
+        imageOverride: phoneObsidianImg,
       },
       {
         id: 'graphite-ash',
@@ -238,7 +244,7 @@ export const PHONES: PhoneProduct[] = [
     basePrice: 1599,
     stockStatus: 'Limited Allocation',
     dispatchTime: 'Dispatches in 2–3 business days',
-    image: '/src/assets/images/phone_fold_silver_1791194394606.jpg',
+    image: phoneFoldSilverImg,
     finishes: [
       {
         id: 'platinum-silver',
@@ -246,7 +252,7 @@ export const PHONES: PhoneProduct[] = [
         hex: '#D8D9DD',
         ringHex: '#A6A8AE',
         materialNote: 'Precision-machined zirconium liquid-metal hinge spine',
-        imageOverride: '/src/assets/images/phone_fold_silver_1791194394606.jpg',
+        imageOverride: phoneFoldSilverImg,
       },
       {
         id: 'carbon-titanium',
@@ -297,7 +303,7 @@ export const PHONES: PhoneProduct[] = [
     basePrice: 849,
     stockStatus: 'In Stock',
     dispatchTime: 'Dispatches within 24 hours',
-    image: '/src/assets/images/phone_compact_ceramic_1791194408140.jpg',
+    image: phoneCompactCeramicImg,
     finishes: [
       {
         id: 'chalk-ceramic',
@@ -305,7 +311,7 @@ export const PHONES: PhoneProduct[] = [
         hex: '#EFECE6',
         ringHex: '#C9C4BA',
         materialNote: 'Sintered zirconia ceramic back with champagne aluminum rail',
-        imageOverride: '/src/assets/images/phone_compact_ceramic_1791194408140.jpg',
+        imageOverride: phoneCompactCeramicImg,
       },
       {
         id: 'basalt-ceramic',
@@ -356,7 +362,7 @@ export const PHONES: PhoneProduct[] = [
     basePrice: 1349,
     stockStatus: 'In Stock',
     dispatchTime: 'Dispatches within 24 hours',
-    image: '/src/assets/images/phone_ultra_desert_titanium_1791194419207.jpg',
+    image: phoneUltraDesertImg,
     finishes: [
       {
         id: 'desert-titanium',
@@ -364,7 +370,7 @@ export const PHONES: PhoneProduct[] = [
         hex: '#C9B39B',
         ringHex: '#9E876E',
         materialNote: 'Knurled brass-accented camera bezel on Grade-5 titanium',
-        imageOverride: '/src/assets/images/phone_ultra_desert_titanium_1791194419207.jpg',
+        imageOverride: phoneUltraDesertImg,
       },
       {
         id: 'natural-titanium',
@@ -372,7 +378,7 @@ export const PHONES: PhoneProduct[] = [
         hex: '#C4BFB6',
         ringHex: '#9E988E',
         materialNote: 'Machined raw titanium with sapphire crystal lens deck',
-        imageOverride: '/src/assets/images/hero_flagship_titanium_phone_1791194367499.jpg',
+        imageOverride: heroTitaniumImg,
       },
       {
         id: 'obsidian-black',
@@ -380,7 +386,7 @@ export const PHONES: PhoneProduct[] = [
         hex: '#222224',
         ringHex: '#3A3A3D',
         materialNote: 'Stealth anodized titanium with red focal index mark',
-        imageOverride: '/src/assets/images/phone_pro_obsidian_1791194383302.jpg',
+        imageOverride: phoneObsidianImg,
       },
     ],
     storageOptions: [
@@ -424,7 +430,7 @@ export const PHONES: PhoneProduct[] = [
     basePrice: 929,
     stockStatus: 'In Stock',
     dispatchTime: 'Dispatches within 24 hours',
-    image: '/src/assets/images/phone_compact_ceramic_1791194408140.jpg',
+    image: phoneCompactCeramicImg,
     finishes: [
       {
         id: 'stone-ivory',
@@ -432,7 +438,7 @@ export const PHONES: PhoneProduct[] = [
         hex: '#EAE6DF',
         ringHex: '#B8B2A6',
         materialNote: 'Warm stone-textured ceramic with brass volume crown',
-        imageOverride: '/src/assets/images/phone_compact_ceramic_1791194408140.jpg',
+        imageOverride: phoneCompactCeramicImg,
       },
       {
         id: 'obsidian-black',
@@ -440,7 +446,7 @@ export const PHONES: PhoneProduct[] = [
         hex: '#202022',
         ringHex: '#3D3D40',
         materialNote: 'Anodized acoustic aluminum enclosure',
-        imageOverride: '/src/assets/images/phone_pro_obsidian_1791194383302.jpg',
+        imageOverride: phoneObsidianImg,
       },
     ],
     storageOptions: [
