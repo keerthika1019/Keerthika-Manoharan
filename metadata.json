@@ -1,0 +1,6 @@
+{
+  "name": "Vantage Mobile — Flagship Smartphones & Precision Hardware",
+  "description": "Direct-to-consumer flagship smartphone storefront featuring interactive hardware configuration, live trade-in valuation, technical specification matrices, and express checkout.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
