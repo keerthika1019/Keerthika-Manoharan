@@ -6,6 +6,7 @@ import {
   StorageOption,
   AppliedTradeIn,
   CartItem,
+  formatINR,
 } from '../data/phones';
 import { SmartImage, HardwareBlueprintCanvas } from './SmartImage';
 
@@ -50,15 +51,15 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
     setGalleryView('studio');
   }, [phone]);
 
-  const carePrice = vantageCare ? 149 : 0;
-  const connectivityDelta = connectivity === 'Global Enterprise eSIM' ? 40 : 0;
+  const carePrice = vantageCare ? 11999 : 0;
+  const connectivityDelta = connectivity === 'Global Enterprise eSIM' ? 3500 : 0;
   const grossUnitPrice =
     phone.basePrice + selectedStorage.priceDelta + carePrice + connectivityDelta;
   const netAfterTradeIn = Math.max(
     0,
     grossUnitPrice - (appliedTradeIn ? appliedTradeIn.creditAmount : 0)
   );
-  const monthlyPrice = (netAfterTradeIn / 24).toFixed(2);
+  const monthlyPrice = Math.round(netAfterTradeIn / 24);
 
   const activeImage = selectedFinish.imageOverride || phone.image;
 
@@ -296,24 +297,24 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                       <div className="space-y-0.5">
                         <div className="flex items-baseline gap-2.5">
                           <span className="text-2xl font-bold font-mono-tabular text-[#141413]">
-                            ${netAfterTradeIn.toLocaleString()}
+                            {formatINR(netAfterTradeIn)}
                           </span>
                           <span className="text-sm line-through text-[#6E6D68] font-mono-tabular">
-                            ${grossUnitPrice.toLocaleString()}
+                            {formatINR(grossUnitPrice)}
                           </span>
                         </div>
                         <p className="text-xs text-[#155E3B] font-medium">
-                          Includes -${appliedTradeIn.creditAmount} trade-in credit (
+                          Includes -{formatINR(appliedTradeIn.creditAmount)} trade-in credit (
                           {appliedTradeIn.model})
                         </p>
                       </div>
                     ) : (
                       <div className="space-y-0.5">
                         <span className="text-2xl font-bold font-mono-tabular text-[#141413]">
-                          ${grossUnitPrice.toLocaleString()}
+                          {formatINR(grossUnitPrice)}
                         </span>
                         <p className="text-xs text-[#6E6D68] font-mono-tabular">
-                          Or ${monthlyPrice}/mo for 24 mo at 0% APR
+                          Or {formatINR(monthlyPrice)}/mo for 24 mo No-Cost EMI
                         </p>
                       </div>
                     )}
@@ -403,7 +404,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                             active ? 'text-white/80' : 'text-[#6E6D68]'
                           }`}
                         >
-                          ${tierPrice.toLocaleString()}
+                          {formatINR(tierPrice)}
                         </p>
                       </button>
                     );
@@ -437,8 +438,8 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                         </p>
                         <p className="text-[11px] text-[#6E6D68] font-mono-tabular mt-0.5">
                           {mode === 'Unlocked SIM-Free'
-                            ? 'Included · Any Carrier'
-                            : '+$40 · Pre-active 140 Countries'}
+                            ? 'Included · All 5G Carriers'
+                            : `+${formatINR(3500)} · Global Roaming`}
                         </p>
                       </button>
                     );
@@ -469,7 +470,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                     </p>
                   </div>
                   <span className="text-xs font-semibold font-mono-tabular shrink-0 text-[#141413]">
-                    {vantageCare ? 'Added (+$149)' : '+$149'}
+                    {vantageCare ? `Added (+${formatINR(11999)})` : `+${formatINR(11999)}`}
                   </span>
                 </button>
               </div>
@@ -491,7 +492,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   >
                     <p className="text-xs font-semibold text-[#141413]">Pay in Full</p>
                     <p className="text-xs font-mono-tabular text-[#575653] mt-0.5">
-                      ${netAfterTradeIn.toLocaleString()} one-time
+                      {formatINR(netAfterTradeIn)} one-time
                     </p>
                   </button>
                   <button
@@ -503,9 +504,9 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                         : 'border-black/12 bg-[#FBFBF9] hover:border-black/30'
                     }`}
                   >
-                    <p className="text-xs font-semibold text-[#141413]">24-Month 0% APR</p>
+                    <p className="text-xs font-semibold text-[#141413]">24-Month No-Cost EMI</p>
                     <p className="text-xs font-mono-tabular text-[#575653] mt-0.5">
-                      ${monthlyPrice}/mo · $0 down
+                      {formatINR(monthlyPrice)}/mo · ₹0 down
                     </p>
                   </button>
                 </div>
@@ -528,8 +529,8 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   <span>
                     Add to Bag —{' '}
                     {paymentMode === 'full'
-                      ? `$${netAfterTradeIn.toLocaleString()}`
-                      : `$${monthlyPrice}/mo`}
+                      ? formatINR(netAfterTradeIn)
+                      : `${formatINR(monthlyPrice)}/mo`}
                   </span>
                 )}
               </button>

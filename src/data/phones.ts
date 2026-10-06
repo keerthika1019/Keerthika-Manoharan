@@ -103,6 +103,10 @@ export interface OrderRecord {
   status: 'Confirmed — Preparing Shipment' | 'Optical Calibration Complete' | 'Dispatched via Insured Courier';
 }
 
+export const formatINR = (amount: number): string => {
+  return `₹${Math.round(amount).toLocaleString('en-IN')}`;
+};
+
 export const HERO_IMAGE = heroTitaniumImg;
 
 export const PHONES: PhoneProduct[] = [
@@ -114,7 +118,7 @@ export const PHONES: PhoneProduct[] = [
     tagline: 'CNC-milled Grade-5 titanium chassis with 5x tetraprism sapphire optics.',
     description:
       'Engineered from a single billet of aerospace Grade-5 titanium bonded to an internal copper-graphite thermal core. Features a 1-inch main optical sensor with custom fluorite glass elements and 2,800-nit LTPO reference display.',
-    basePrice: 1099,
+    basePrice: 94999,
     stockStatus: 'In Stock',
     dispatchTime: 'Dispatches within 24 hours',
     image: heroTitaniumImg,
@@ -146,8 +150,8 @@ export const PHONES: PhoneProduct[] = [
     ],
     storageOptions: [
       { capacity: '256 GB', priceDelta: 0 },
-      { capacity: '512 GB', priceDelta: 150 },
-      { capacity: '1 TB', priceDelta: 350 },
+      { capacity: '512 GB', priceDelta: 12000 },
+      { capacity: '1 TB', priceDelta: 28000 },
     ],
     specs: {
       displaySize: '6.8"',
@@ -182,7 +186,7 @@ export const PHONES: PhoneProduct[] = [
     tagline: 'Co-engineered for mobile cinematography with hardware LUT pipeline and matte anti-glare back.',
     description:
       'Designed for field photographers and cinematographers. Features a micro-etched obsidian glass back, dedicated two-stage mechanical shutter button on the lower rail, and uncompressed 14-bit RAW capture across all three focal lengths.',
-    basePrice: 1199,
+    basePrice: 104999,
     stockStatus: 'In Stock',
     dispatchTime: 'Dispatches within 24 hours',
     image: phoneObsidianImg,
@@ -205,8 +209,8 @@ export const PHONES: PhoneProduct[] = [
     ],
     storageOptions: [
       { capacity: '256 GB', priceDelta: 0 },
-      { capacity: '512 GB', priceDelta: 150 },
-      { capacity: '1 TB', priceDelta: 350 },
+      { capacity: '512 GB', priceDelta: 12000 },
+      { capacity: '1 TB', priceDelta: 28000 },
     ],
     specs: {
       displaySize: '6.7"',
@@ -241,7 +245,7 @@ export const PHONES: PhoneProduct[] = [
     tagline: '9.2mm folded profile with zero-gap liquid-metal micro-hinge and dual 120Hz LTPO displays.',
     description:
       'Redefining spatial computing in the pocket. At just 4.5mm unfolded, the Horizon Fold combines a standard 21:9 cover screen with an expansive 8.0-inch anti-reflective inner canvas rated for 500,000 articulation cycles.',
-    basePrice: 1599,
+    basePrice: 139999,
     stockStatus: 'Limited Allocation',
     dispatchTime: 'Dispatches in 2–3 business days',
     image: phoneFoldSilverImg,
@@ -264,8 +268,8 @@ export const PHONES: PhoneProduct[] = [
     ],
     storageOptions: [
       { capacity: '256 GB', priceDelta: 0 },
-      { capacity: '512 GB', priceDelta: 150 },
-      { capacity: '1 TB', priceDelta: 350 },
+      { capacity: '512 GB', priceDelta: 12000 },
+      { capacity: '1 TB', priceDelta: 28000 },
     ],
     specs: {
       displaySize: '8.0" Inner / 6.4" Cover',
@@ -300,7 +304,7 @@ export const PHONES: PhoneProduct[] = [
     tagline: 'One-handed 6.1-inch ergonomic form in warm zirconia ceramic with flush camera housing.',
     description:
       'Built for purists who value pocketable dimensions without flagship compromise. Features a kiln-fired micro-crystalline zirconia ceramic unibody that resists scratches without a case, paired with a dedicated balanced DAC for studio acoustics.',
-    basePrice: 849,
+    basePrice: 74999,
     stockStatus: 'In Stock',
     dispatchTime: 'Dispatches within 24 hours',
     image: phoneCompactCeramicImg,
@@ -323,8 +327,8 @@ export const PHONES: PhoneProduct[] = [
     ],
     storageOptions: [
       { capacity: '256 GB', priceDelta: 0 },
-      { capacity: '512 GB', priceDelta: 150 },
-      { capacity: '1 TB', priceDelta: 350 },
+      { capacity: '512 GB', priceDelta: 12000 },
+      { capacity: '1 TB', priceDelta: 28000 },
     ],
     specs: {
       displaySize: '6.1"',
@@ -359,7 +363,7 @@ export const PHONES: PhoneProduct[] = [
     tagline: 'Continuous 85mm–170mm optical zoom lens with knurled focus control ring.',
     description:
       'Our pinnacle imaging instrument. Houses a true moving-element optical zoom periscope assembly alongside a 200MP apochromatic telephoto sensor and satellite emergency transceiver in a desert-sand titanium body.',
-    basePrice: 1349,
+    basePrice: 119999,
     stockStatus: 'In Stock',
     dispatchTime: 'Dispatches within 24 hours',
     image: phoneUltraDesertImg,
@@ -391,8 +395,8 @@ export const PHONES: PhoneProduct[] = [
     ],
     storageOptions: [
       { capacity: '256 GB', priceDelta: 0 },
-      { capacity: '512 GB', priceDelta: 150 },
-      { capacity: '1 TB', priceDelta: 350 },
+      { capacity: '512 GB', priceDelta: 12000 },
+      { capacity: '1 TB', priceDelta: 28000 },
     ],
     specs: {
       displaySize: '6.85"',
@@ -427,7 +431,7 @@ export const PHONES: PhoneProduct[] = [
     tagline: 'Dual ESS Sabre quad-DAC architecture with zero-PWM DC-dimmed OLED display.',
     description:
       'Engineered for audiophiles and flicker-sensitive readers. Combines a true hardware DC-dimmed 6.3-inch display with dedicated analog headphone circuitry, dual front-firing planar magnetic micro-speakers, and a tactile volume wheel.',
-    basePrice: 929,
+    basePrice: 79999,
     stockStatus: 'In Stock',
     dispatchTime: 'Dispatches within 24 hours',
     image: phoneCompactCeramicImg,
@@ -451,8 +455,8 @@ export const PHONES: PhoneProduct[] = [
     ],
     storageOptions: [
       { capacity: '256 GB', priceDelta: 0 },
-      { capacity: '512 GB', priceDelta: 150 },
-      { capacity: '1 TB', priceDelta: 350 },
+      { capacity: '512 GB', priceDelta: 12000 },
+      { capacity: '1 TB', priceDelta: 28000 },
     ],
     specs: {
       displaySize: '6.3"',
@@ -485,62 +489,62 @@ export const TRADE_IN_MODELS: TradeInDeviceModel[] = [
   {
     brand: 'Apple',
     model: 'iPhone 16 Pro Max',
-    baseValue: 640,
-    storageMultipliers: { '128 GB': 0, '256 GB': 40, '512 GB': 90 },
+    baseValue: 54000,
+    storageMultipliers: { '128 GB': 0, '256 GB': 3500, '512 GB': 7500 },
   },
   {
     brand: 'Apple',
     model: 'iPhone 16 Pro',
-    baseValue: 550,
-    storageMultipliers: { '128 GB': 0, '256 GB': 40, '512 GB': 80 },
+    baseValue: 46000,
+    storageMultipliers: { '128 GB': 0, '256 GB': 3500, '512 GB': 6500 },
   },
   {
     brand: 'Apple',
     model: 'iPhone 15 Pro Max',
-    baseValue: 490,
-    storageMultipliers: { '128 GB': 0, '256 GB': 35, '512 GB': 70 },
+    baseValue: 41000,
+    storageMultipliers: { '128 GB': 0, '256 GB': 3000, '512 GB': 6000 },
   },
   {
     brand: 'Apple',
     model: 'iPhone 14 Pro',
-    baseValue: 340,
-    storageMultipliers: { '128 GB': 0, '256 GB': 30, '512 GB': 60 },
+    baseValue: 28500,
+    storageMultipliers: { '128 GB': 0, '256 GB': 2500, '512 GB': 5000 },
   },
   {
     brand: 'Samsung',
     model: 'Galaxy S25 Ultra',
-    baseValue: 610,
-    storageMultipliers: { '128 GB': 0, '256 GB': 45, '512 GB': 85 },
+    baseValue: 51000,
+    storageMultipliers: { '128 GB': 0, '256 GB': 3800, '512 GB': 7000 },
   },
   {
     brand: 'Samsung',
     model: 'Galaxy Z Fold 6',
-    baseValue: 650,
-    storageMultipliers: { '128 GB': 0, '256 GB': 50, '512 GB': 95 },
+    baseValue: 55000,
+    storageMultipliers: { '128 GB': 0, '256 GB': 4200, '512 GB': 8000 },
   },
   {
     brand: 'Samsung',
     model: 'Galaxy S24 Ultra',
-    baseValue: 460,
-    storageMultipliers: { '128 GB': 0, '256 GB': 35, '512 GB': 70 },
+    baseValue: 38500,
+    storageMultipliers: { '128 GB': 0, '256 GB': 3000, '512 GB': 6000 },
   },
   {
     brand: 'Google',
     model: 'Pixel 9 Pro XL',
-    baseValue: 470,
-    storageMultipliers: { '128 GB': 0, '256 GB': 35, '512 GB': 70 },
+    baseValue: 39000,
+    storageMultipliers: { '128 GB': 0, '256 GB': 3000, '512 GB': 6000 },
   },
   {
     brand: 'Google',
     model: 'Pixel 9 Pro Fold',
-    baseValue: 580,
-    storageMultipliers: { '128 GB': 0, '256 GB': 45, '512 GB': 85 },
+    baseValue: 48500,
+    storageMultipliers: { '128 GB': 0, '256 GB': 3800, '512 GB': 7000 },
   },
   {
     brand: 'Vantage',
     model: 'Vantage 00 Titanium (Gen 1)',
-    baseValue: 520,
-    storageMultipliers: { '128 GB': 0, '256 GB': 45, '512 GB': 90 },
+    baseValue: 44000,
+    storageMultipliers: { '128 GB': 0, '256 GB': 3800, '512 GB': 7500 },
   },
 ];
 

@@ -10,7 +10,7 @@ import {
   ArrowLeft,
   Package,
 } from 'lucide-react';
-import { CartItem, AppliedTradeIn, OrderRecord } from '../data/phones';
+import { CartItem, AppliedTradeIn, OrderRecord, formatINR } from '../data/phones';
 import { SmartImage } from './SmartImage';
 
 interface CartAndCheckoutDrawerProps {
@@ -66,8 +66,8 @@ export const CartAndCheckoutDrawer: React.FC<CartAndCheckoutDrawerProps> = ({
   const subtotal = cart.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0);
   const tradeInCredit =
     cart.length > 0 && appliedTradeIn ? appliedTradeIn.creditAmount : 0;
-  const freeShippingThreshold = 500;
-  const shippingCost = subtotal >= freeShippingThreshold || subtotal === 0 ? 0 : 25;
+  const freeShippingThreshold = 25000;
+  const shippingCost = subtotal >= freeShippingThreshold || subtotal === 0 ? 0 : 999;
   const totalAmount = Math.max(0, subtotal - tradeInCredit + shippingCost);
 
   const handlePlaceOrder = (e: React.FormEvent) => {
@@ -238,8 +238,8 @@ export const CartAndCheckoutDrawer: React.FC<CartAndCheckoutDrawerProps> = ({
                       <Truck className="w-4 h-4 text-[#141413] shrink-0" />
                       <span className="text-[#141413] font-medium">
                         {subtotal >= freeShippingThreshold
-                          ? 'Qualified for Free Insured Express Courier ($0.00)'
-                          : `Add $${(freeShippingThreshold - subtotal).toLocaleString()} for free express courier`}
+                          ? 'Qualified for Free Insured Express Courier (₹0)'
+                          : `Add ${formatINR(freeShippingThreshold - subtotal)} for free express courier`}
                       </span>
                     </div>
                     <span className="font-mono-tabular text-[#6E6D68]">24h Dispatch</span>
@@ -265,7 +265,7 @@ export const CartAndCheckoutDrawer: React.FC<CartAndCheckoutDrawerProps> = ({
                               {item.phoneName}
                             </h3>
                             <span className="text-sm font-semibold font-mono-tabular text-[#141413] shrink-0">
-                              ${(item.unitPrice * item.quantity).toLocaleString()}
+                              {formatINR(item.unitPrice * item.quantity)}
                             </span>
                           </div>
 
@@ -274,7 +274,7 @@ export const CartAndCheckoutDrawer: React.FC<CartAndCheckoutDrawerProps> = ({
                           </p>
                           {item.vantageCare && (
                             <p className="text-[11px] text-[#141413] font-medium mt-0.5">
-                              Includes VantageCare+ 3-Year Sapphire Coverage (+$149)
+                              Includes VantageCare+ 3-Year Sapphire Coverage (+{formatINR(11999)})
                             </p>
                           )}
 
@@ -325,8 +325,8 @@ export const CartAndCheckoutDrawer: React.FC<CartAndCheckoutDrawerProps> = ({
                       </p>
                       <p className="text-[11px] text-[#6E6D68] mt-0.5">
                         {appliedTradeIn
-                          ? `Instant deduction of -$${appliedTradeIn.creditAmount} locked for 14 days`
-                          : 'Get up to $745 instant credit toward your hardware order'}
+                          ? `Instant deduction of -${formatINR(appliedTradeIn.creditAmount)} locked for 14 days`
+                          : `Get up to ${formatINR(63000)} instant credit toward your hardware order`}
                       </p>
                     </div>
                     <button
@@ -359,17 +359,17 @@ export const CartAndCheckoutDrawer: React.FC<CartAndCheckoutDrawerProps> = ({
                       {
                         id: 'Cash on Delivery (COD)',
                         title: 'Cash on Delivery (COD) / Courier Terminal',
-                        desc: 'Pay upon physical inspection at delivery · $0 upfront fee',
+                        desc: 'Pay upon physical inspection at delivery · ₹0 upfront fee',
                       },
                       {
                         id: 'Card',
-                        title: 'Instant Card / Wire Settlement',
+                        title: 'Instant Card / UPI / NetBanking Settlement',
                         desc: 'Immediate full settlement · Insured priority dispatch',
                       },
                       {
                         id: 'Monthly 0% APR',
-                        title: `24-Month 0% APR Financing ($${(totalAmount / 24).toFixed(2)}/mo)`,
-                        desc: 'Equal monthly payments · Zero interest or origination fees',
+                        title: `24-Month No-Cost EMI (${formatINR(Math.round(totalAmount / 24))}/mo)`,
+                        desc: 'Equal monthly payments · Zero interest or processing fees',
                       },
                     ] as const
                   ).map((method) => {
@@ -536,7 +536,7 @@ export const CartAndCheckoutDrawer: React.FC<CartAndCheckoutDrawerProps> = ({
                 <p className="text-[#575653] leading-relaxed">
                   Total due upon verification:{' '}
                   <strong className="font-mono-tabular text-[#141413]">
-                    ${totalAmount.toLocaleString()}
+                    {formatINR(totalAmount)}
                   </strong>{' '}
                   (Free insured courier threshold met). Every unit ships sealed with a
                   matching factory calibration report.
@@ -587,7 +587,7 @@ export const CartAndCheckoutDrawer: React.FC<CartAndCheckoutDrawerProps> = ({
                         </p>
                       </div>
                       <span className="font-mono-tabular font-semibold text-[#141413]">
-                        ${(item.unitPrice * item.quantity).toLocaleString()}
+                        {formatINR(item.unitPrice * item.quantity)}
                       </span>
                     </div>
                   ))}
@@ -597,14 +597,14 @@ export const CartAndCheckoutDrawer: React.FC<CartAndCheckoutDrawerProps> = ({
                   <div className="flex justify-between text-[#575653]">
                     <span>Hardware Subtotal</span>
                     <span className="font-mono-tabular">
-                      ${latestOrder.subtotal.toLocaleString()}
+                      {formatINR(latestOrder.subtotal)}
                     </span>
                   </div>
                   {latestOrder.tradeInCredit > 0 && (
                     <div className="flex justify-between text-[#155E3B] font-medium">
                       <span>Applied Trade-In Credit</span>
                       <span className="font-mono-tabular">
-                        -${latestOrder.tradeInCredit.toLocaleString()}
+                        -{formatINR(latestOrder.tradeInCredit)}
                       </span>
                     </div>
                   )}
@@ -612,8 +612,8 @@ export const CartAndCheckoutDrawer: React.FC<CartAndCheckoutDrawerProps> = ({
                     <span>Insured Express Courier</span>
                     <span className="font-mono-tabular">
                       {latestOrder.shippingCost === 0
-                        ? 'FREE ($0.00)'
-                        : `$${latestOrder.shippingCost}`}
+                        ? 'FREE (₹0)'
+                        : formatINR(latestOrder.shippingCost)}
                     </span>
                   </div>
                   <div className="flex justify-between text-[#575653]">
@@ -623,7 +623,7 @@ export const CartAndCheckoutDrawer: React.FC<CartAndCheckoutDrawerProps> = ({
                   <div className="flex justify-between text-sm font-bold text-[#141413] pt-2 border-t border-black/8">
                     <span>Total Verified Amount</span>
                     <span className="font-mono-tabular">
-                      ${latestOrder.totalAmount.toLocaleString()}
+                      {formatINR(latestOrder.totalAmount)}
                     </span>
                   </div>
                 </div>
@@ -692,7 +692,7 @@ export const CartAndCheckoutDrawer: React.FC<CartAndCheckoutDrawerProps> = ({
                               {item.quantity}× {item.phoneName} ({item.storage.capacity})
                             </span>
                             <span className="font-mono-tabular">
-                              ${(item.unitPrice * item.quantity).toLocaleString()}
+                              {formatINR(item.unitPrice * item.quantity)}
                             </span>
                           </div>
                         ))}
@@ -703,7 +703,7 @@ export const CartAndCheckoutDrawer: React.FC<CartAndCheckoutDrawerProps> = ({
                           {order.customerName} · {order.paymentMethod}
                         </span>
                         <span className="font-bold font-mono-tabular text-[#141413]">
-                          Total: ${order.totalAmount.toLocaleString()}
+                          Total: {formatINR(order.totalAmount)}
                         </span>
                       </div>
                     </div>
@@ -720,26 +720,26 @@ export const CartAndCheckoutDrawer: React.FC<CartAndCheckoutDrawerProps> = ({
             <div className="space-y-1.5 text-xs">
               <div className="flex justify-between text-[#575653]">
                 <span>Subtotal</span>
-                <span className="font-mono-tabular">${subtotal.toLocaleString()}</span>
+                <span className="font-mono-tabular">{formatINR(subtotal)}</span>
               </div>
               {tradeInCredit > 0 && (
                 <div className="flex justify-between text-[#155E3B] font-medium">
                   <span>Instant Trade-In Credit ({appliedTradeIn?.model})</span>
                   <span className="font-mono-tabular">
-                    -${tradeInCredit.toLocaleString()}
+                    -{formatINR(tradeInCredit)}
                   </span>
                 </div>
               )}
               <div className="flex justify-between text-[#575653]">
                 <span>Insured Express Courier</span>
                 <span className="font-mono-tabular">
-                  {shippingCost === 0 ? 'FREE ($0.00)' : `$${shippingCost}`}
+                  {shippingCost === 0 ? 'FREE (₹0)' : formatINR(shippingCost)}
                 </span>
               </div>
               <div className="flex justify-between text-sm font-bold text-[#141413] pt-2 border-t border-black/8">
                 <span>Estimated Total</span>
                 <span className="font-mono-tabular">
-                  ${totalAmount.toLocaleString()}
+                  {formatINR(totalAmount)}
                 </span>
               </div>
             </div>
@@ -749,7 +749,7 @@ export const CartAndCheckoutDrawer: React.FC<CartAndCheckoutDrawerProps> = ({
               onClick={() => setStage('checkout')}
               className="w-full py-3.5 px-6 rounded-lg bg-[#141413] text-[#FBFBF9] text-xs font-semibold hover:bg-[#292927] transition-colors whitespace-nowrap cursor-pointer"
             >
-              Proceed to Verification & Checkout — ${totalAmount.toLocaleString()}
+              Proceed to Verification & Checkout — {formatINR(totalAmount)}
             </button>
           </div>
         )}
@@ -758,7 +758,7 @@ export const CartAndCheckoutDrawer: React.FC<CartAndCheckoutDrawerProps> = ({
           <div className="p-6 border-t border-black/10 bg-[#FBFBF9] space-y-3">
             <div className="flex items-center justify-between text-sm font-bold text-[#141413]">
               <span>Total Verification Amount</span>
-              <span className="font-mono-tabular">${totalAmount.toLocaleString()}</span>
+              <span className="font-mono-tabular">{formatINR(totalAmount)}</span>
             </div>
             <button
               type="submit"

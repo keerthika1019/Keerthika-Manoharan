@@ -4,6 +4,7 @@ import {
   PhoneProduct,
   TRADE_IN_MODELS,
   AppliedTradeIn,
+  formatINR,
 } from '../data/phones';
 import { SmartImage } from './SmartImage';
 
@@ -52,10 +53,10 @@ export const TradeInEstimatorModal: React.FC<TradeInModalProps> = ({
 
   const screenDeduction = screenIntact ? 0 : Math.round(baseWithStorage * 0.35);
   const bodyDeduction = bodyClean ? 0 : Math.round(baseWithStorage * 0.15);
-  const batteryDeduction = batteryHealthy ? 0 : 45;
+  const batteryDeduction = batteryHealthy ? 0 : 3500;
 
   const estimatedCredit = Math.max(
-    50,
+    4000,
     baseWithStorage - screenDeduction - bodyDeduction - batteryDeduction
   );
 
@@ -151,7 +152,7 @@ export const TradeInEstimatorModal: React.FC<TradeInModalProps> = ({
               >
                 {modelsForBrand.map((m) => (
                   <option key={m.model} value={m.model}>
-                    {m.model} (Up to ${m.baseValue + m.storageMultipliers['512 GB']})
+                    {m.model} (Up to {formatINR(m.baseValue + m.storageMultipliers['512 GB'])})
                   </option>
                 ))}
               </select>
@@ -204,7 +205,7 @@ export const TradeInEstimatorModal: React.FC<TradeInModalProps> = ({
                   </p>
                 </div>
                 <span className="text-xs font-mono-tabular font-medium text-[#141413]">
-                  {screenIntact ? 'Verified ✓' : `-$${screenDeduction}`}
+                  {screenIntact ? 'Verified ✓' : `-${formatINR(screenDeduction)}`}
                 </span>
               </button>
 
@@ -226,7 +227,7 @@ export const TradeInEstimatorModal: React.FC<TradeInModalProps> = ({
                   </p>
                 </div>
                 <span className="text-xs font-mono-tabular font-medium text-[#141413]">
-                  {bodyClean ? 'Verified ✓' : `-$${bodyDeduction}`}
+                  {bodyClean ? 'Verified ✓' : `-${formatINR(bodyDeduction)}`}
                 </span>
               </button>
 
@@ -248,7 +249,7 @@ export const TradeInEstimatorModal: React.FC<TradeInModalProps> = ({
                   </p>
                 </div>
                 <span className="text-xs font-mono-tabular font-medium text-[#141413]">
-                  {batteryHealthy ? 'Verified ✓' : `-$${batteryDeduction}`}
+                  {batteryHealthy ? 'Verified ✓' : `-${formatINR(batteryDeduction)}`}
                 </span>
               </button>
             </div>
@@ -261,7 +262,7 @@ export const TradeInEstimatorModal: React.FC<TradeInModalProps> = ({
                 Guaranteed 14-Day Lock · {activeModelObj.model} ({selectedStorage})
               </p>
               <p className="text-2xl font-bold font-mono-tabular text-[#141413] mt-0.5">
-                ${estimatedCredit.toLocaleString()} Instant Credit
+                {formatINR(estimatedCredit)} Instant Credit
               </p>
             </div>
 
@@ -283,7 +284,7 @@ export const TradeInEstimatorModal: React.FC<TradeInModalProps> = ({
                 onClick={handleApply}
                 className="px-5 py-2.5 rounded-lg bg-[#141413] text-[#FBFBF9] text-xs font-semibold hover:bg-[#292927] transition-colors whitespace-nowrap cursor-pointer"
               >
-                Apply ${estimatedCredit} Credit
+                Apply {formatINR(estimatedCredit)} Credit
               </button>
             </div>
           </div>
@@ -322,8 +323,8 @@ export const ComparisonMatrixSection: React.FC<ComparisonMatrixSectionProps> = (
       label: 'Starting Price',
       getValue: (p) =>
         appliedTradeIn
-          ? `$${Math.max(0, p.basePrice - appliedTradeIn.creditAmount).toLocaleString()} (with trade-in)`
-          : `$${p.basePrice.toLocaleString()}`,
+          ? `${formatINR(Math.max(0, p.basePrice - appliedTradeIn.creditAmount))} (with trade-in)`
+          : formatINR(p.basePrice),
     },
     { label: 'Display Diagonal', getValue: (p) => p.specs.displaySize },
     { label: 'Panel Architecture', getValue: (p) => p.specs.displayTech },
@@ -423,7 +424,7 @@ export const ComparisonMatrixSection: React.FC<ComparisonMatrixSectionProps> = (
 
                 <div className="flex items-center justify-between pt-1">
                   <span className="text-sm font-semibold font-mono-tabular text-[#141413]">
-                    ${phone.basePrice.toLocaleString()}
+                    {formatINR(phone.basePrice)}
                   </span>
                   <button
                     type="button"

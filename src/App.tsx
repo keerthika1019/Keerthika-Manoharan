@@ -21,6 +21,7 @@ import {
   CartItem,
   AppliedTradeIn,
   OrderRecord,
+  formatINR,
 } from './data/phones';
 import { SmartImage } from './components/SmartImage';
 import { ProductDetailModal } from './components/ProductDetailModal';
@@ -52,14 +53,14 @@ const INITIAL_SAMPLE_ORDER: OrderRecord = {
       connectivity: 'Unlocked SIM-Free',
       vantageCare: true,
       paymentMode: 'full',
-      unitPrice: 1398,
+      unitPrice: 118998,
       quantity: 1,
     },
   ],
-  subtotal: 1398,
+  subtotal: 118998,
   tradeInCredit: 0,
   shippingCost: 0,
-  totalAmount: 1398,
+  totalAmount: 118998,
   status: 'Confirmed — Preparing Shipment',
 };
 
@@ -92,7 +93,7 @@ export default function App() {
   const [isTradeInOpen, setIsTradeInOpen] = useState(false);
   const [appliedTradeIn, setAppliedTradeIn] = useState<AppliedTradeIn | null>(() => {
     try {
-      const saved = localStorage.getItem('vantage_trade_in');
+      const saved = localStorage.getItem('vantage_trade_in_inr');
       return saved ? JSON.parse(saved) : null;
     } catch {
       return null;
@@ -109,7 +110,7 @@ export default function App() {
   // Cart & Orders State
   const [cart, setCart] = useState<CartItem[]>(() => {
     try {
-      const saved = localStorage.getItem('vantage_cart');
+      const saved = localStorage.getItem('vantage_cart_inr');
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
@@ -118,7 +119,7 @@ export default function App() {
 
   const [orders, setOrders] = useState<OrderRecord[]>(() => {
     try {
-      const saved = localStorage.getItem('vantage_orders');
+      const saved = localStorage.getItem('vantage_orders_inr');
       return saved ? JSON.parse(saved) : [INITIAL_SAMPLE_ORDER];
     } catch {
       return [INITIAL_SAMPLE_ORDER];
@@ -130,7 +131,7 @@ export default function App() {
 
   useEffect(() => {
     try {
-      localStorage.setItem('vantage_cart', JSON.stringify(cart));
+      localStorage.setItem('vantage_cart_inr', JSON.stringify(cart));
     } catch {
       // ignore storage errors
     }
@@ -139,9 +140,9 @@ export default function App() {
   useEffect(() => {
     try {
       if (appliedTradeIn) {
-        localStorage.setItem('vantage_trade_in', JSON.stringify(appliedTradeIn));
+        localStorage.setItem('vantage_trade_in_inr', JSON.stringify(appliedTradeIn));
       } else {
-        localStorage.removeItem('vantage_trade_in');
+        localStorage.removeItem('vantage_trade_in_inr');
       }
     } catch {
       // ignore storage errors
@@ -150,7 +151,7 @@ export default function App() {
 
   useEffect(() => {
     try {
-      localStorage.setItem('vantage_orders', JSON.stringify(orders));
+      localStorage.setItem('vantage_orders_inr', JSON.stringify(orders));
     } catch {
       // ignore storage errors
     }
@@ -349,7 +350,7 @@ export default function App() {
               }`}
             >
               {appliedTradeIn
-                ? `Trade-In: -$${appliedTradeIn.creditAmount}`
+                ? `Trade-In: -${formatINR(appliedTradeIn.creditAmount)}`
                 : 'Trade-In Estimator'}
             </button>
 
@@ -400,10 +401,10 @@ export default function App() {
                   className="px-6 py-3.5 rounded-lg bg-[#141413] text-[#FBFBF9] text-sm font-semibold hover:bg-[#292927] transition-colors inline-flex items-center gap-2 whitespace-nowrap cursor-pointer"
                 >
                   <span>
-                    Configure Vantage 01 Pro — $
+                    Configure Vantage 01 Pro —{' '}
                     {appliedTradeIn
-                      ? Math.max(0, PHONES[0].basePrice - appliedTradeIn.creditAmount).toLocaleString()
-                      : PHONES[0].basePrice.toLocaleString()}
+                      ? formatINR(Math.max(0, PHONES[0].basePrice - appliedTradeIn.creditAmount))
+                      : formatINR(PHONES[0].basePrice)}
                   </span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
@@ -579,7 +580,7 @@ export default function App() {
             <div className="mb-8 p-4 rounded-xl bg-[#F2F1ED] border border-black/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div className="text-xs">
                 <span className="font-semibold text-[#155E3B]">
-                  Active Trade-In Credit Applied (-${appliedTradeIn.creditAmount}):
+                  Active Trade-In Credit Applied (-{formatINR(appliedTradeIn.creditAmount)}):
                 </span>{' '}
                 <span className="text-[#575653]">
                   All prices below reflect your instant deduction for trading in a{' '}
@@ -680,11 +681,11 @@ export default function App() {
                           </h3>
                           <div className="text-right shrink-0">
                             <span className="text-[15px] font-semibold font-mono-tabular text-[#141413]">
-                              ${effectivePrice.toLocaleString()}
+                              {formatINR(effectivePrice)}
                             </span>
                             {appliedTradeIn && (
                               <span className="block text-[11px] line-through text-[#6E6D68] font-mono-tabular">
-                                ${phone.basePrice.toLocaleString()}
+                                {formatINR(phone.basePrice)}
                               </span>
                             )}
                           </div>
